@@ -18,10 +18,13 @@ pipeline {
         stage('Build-Image') {
             steps {
                 configFileProvider([configFile(fileId: 'c3b6e546-7eef-4758-bc4a-fceb4189249c',variable: 'APP_FRONTEND_ENV')]){
+                script{
                 sh 'cp $APP_FRONTEND_ENV .env'
                 app = docker.build("gym-project-frontend/test")
                 sh 'docker tag gym-project/test:latest \$IMAGE_TAGGED'
                 sh 'docker push \$IMAGE_TAGGED'
+                }
+                
             }
         }
         }
