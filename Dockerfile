@@ -1,4 +1,4 @@
-FROM node:20-bookworm
+FROM node:20-bookworm as build
 
 # Criar diretório e garantir permissões corretas antes de copiar os arquivos
 RUN mkdir -p /home/node/app && chown -R node:node /home/node/app
