@@ -1,0 +1,33 @@
+#!/usr/bin/env groovy
+
+pipeline {
+    agent any
+    
+    environment{
+        DOCKER_CREDS = credentials('github-Container-creds')
+        IMAGE_TAGGED = "ghcr.io/ruanfreits/workout-platform-frontend:latest"
+    }
+    stages {
+        stage('Login to Docker') {
+            steps {
+                // Use the DOCKER_CREDS environment variable, which automatically
+                // provides DOCKER_CREDS_USR and DOCKER_CREDS_PSW
+                sh "docker login -u \$DOCKER_CREDS_USR -p \$DOCKER_CREDS_PSW ghcr.io"
+            }
+        }
+        stage('Build-Image') {
+            steps {
+                 steps {
+                configFileProvider([configFile(fileId: '37568ccb-b1bc-447a-a416-3793483a5fcc',variable: 'APP_FRONTEND_ENV')]){
+                    sh 'cp $APP_FRONTEND_ENV .env'
+                }
+                }
+                script {
+                    app = docker.build("gym-project-frontend/test")
+                    sh 'docker tag gym-project/test:latest \$IMAGE_TAGGED'
+                    sh 'docker push \$IMAGE_TAGGED'
+                }
+            }
+        }
+    }
+}
