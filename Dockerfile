@@ -21,7 +21,7 @@ RUN npm install
 COPY --chown=node:node . .
 
 FROM nginx:stable-alpine
-COPY --from:build /home/node/app/build /usr/share/nginx/html
+COPY --from=build /home/node/app/build /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
