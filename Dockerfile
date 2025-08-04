@@ -15,7 +15,7 @@ RUN chown -R node:node /home/node/app
 USER node
 
 # Agora instalar as dependências sem erro de permissão
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 # Copiar o restante do código com as permissões corretas
 COPY --chown=node:node . .
