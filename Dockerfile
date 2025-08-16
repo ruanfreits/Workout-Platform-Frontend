@@ -12,10 +12,12 @@ USER node
 
 RUN npm install --legacy-peer-deps
 
-RUN npm run build
-
 # Copiar o restante do código com as permissões corretas
 COPY --chown=node:node . .
+
+RUN npm run build
+
+
 
 FROM nginx:latest
 COPY --from=build /home/node/app/build /usr/share/nginx/html
