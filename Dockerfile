@@ -12,7 +12,7 @@ USER node
 
 RUN npm install --legacy-peer-deps
 
-RUN npn run build
+RUN npm run build
 
 # Copiar o restante do código com as permissões corretas
 COPY --chown=node:node . .
