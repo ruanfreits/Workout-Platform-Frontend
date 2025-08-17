@@ -24,9 +24,32 @@ pipeline {
                 sh 'docker tag gym-project/test:latest \$IMAGE_TAGGED'
                 sh 'docker push \$IMAGE_TAGGED'
                 }
-                
             }
         }
+    }
+        stage('Deploy'){
+                steps{
+                    withCredentials([sshUserPrivateKey(credentialsId: 'jenkins-remote', keyFileVariable: 'SSH_KEY')]) {
+                            sh '''
+                                rm -f /tmp/jenkins_keys/id_rsa_temp || true &&
+
+                                mkdir -p /tmp/jenkins_keys
+                                install -m 600 $SSH_KEY /tmp/jenkins_keys/$PRIVATE_KEY_FILE
+                                
+                                ls -l /tmp/jenkins_keys
+
+                                
+                                ssh -i /tmp/jenkins_keys/$PRIVATE_KEY_FILE -o StrictHostKeyChecking=no  vboxuser@192.168.0.72 '
+                                ls -l /home
+                                docker pull ghcr.io/ruanfreits/workout-platform-frontend:latest &&
+                                docker rm -f nginx_front || true &&
+                                docker run -d  -p 80:80 --name nginx_front ghcr.io/ruanfreits/workout-platform-frontend:latest'
+                            '''
+                        }
+            }
         }
+
+
+
     }
 }
