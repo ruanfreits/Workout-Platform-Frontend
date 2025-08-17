@@ -22,7 +22,7 @@ pipeline {
                 script{
                 sh 'cp $APP_FRONTEND_ENV .env'
                 app = docker.build("gym-project-frontend/test")
-                sh 'docker tag gym-project/test:latest ghcr.io/ruanfreits/workout-platform-frontend:latest'
+                sh 'docker tag gym-project-frontend/test:latest ghcr.io/ruanfreits/workout-platform-frontend:latest'
                 sh 'docker push ghcr.io/ruanfreits/workout-platform-frontend:latest'
                 }
             }
