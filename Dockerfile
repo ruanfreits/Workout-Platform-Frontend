@@ -10,12 +10,12 @@ RUN chown -R node:node /home/node/app
 
 USER node
 
-RUN npm install
+RUN npm install  --legacy-peer-deps
 
 # Copiar o restante do código com as permissões corretas
 COPY --chown=node:node . .
 
-RUN npm run build
+RUN npm run build --force
 
 
 
