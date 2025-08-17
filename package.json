@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@chakra-ui/react": "2.8.0",
+    "@chakra-ui/react": "^3.24.2",
     "@emotion/react": "11.11.1",
     "@emotion/styled": "11.11.0",
     "@popperjs/core": "^2.11.8",
@@ -33,10 +33,10 @@
     "react-native": "^0.77.1",
     "react-router-dom": "^6.29.0",
     "react-scripts": "^5.0.1",
+    "reactjs-popup": "^2.0.6",
     "styled-components": "^5.3.11",
     "vite": "^4.5.9",
-    "web-vitals": "^2.1.0",
-    "reactjs-popup": "^2.0.6"
+    "web-vitals": "^2.1.0"
   },
   "scripts": {
     "start": "react-scripts start",

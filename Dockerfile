@@ -10,14 +10,12 @@ RUN chown -R node:node /home/node/app
 
 USER node
 
-RUN npm install  --legacy-peer-deps
+RUN npm install -legacy-peer-deps
 
 # Copiar o restante do código com as permissões corretas
 COPY --chown=node:node . .
 
-RUN npm run build --force
-
-
+RUN npm run build 
 
 FROM nginx:latest
 COPY --from=build /home/node/app/build /usr/share/nginx/html
