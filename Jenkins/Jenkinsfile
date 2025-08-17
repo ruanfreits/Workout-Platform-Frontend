@@ -6,6 +6,7 @@ pipeline {
     environment{
         DOCKER_CREDS = credentials('github-Container-creds')
         IMAGE_TAGGED = "ghcr.io/ruanfreits/workout-platform-frontend:latest"
+        PRIVATE_KEY_FILE = 'id_rsa_temp'
     }
     stages {
         stage('Login to Docker') {
