@@ -24,6 +24,7 @@ pipeline {
                 app = docker.build("gym-project-frontend/test")
                 sh 'docker tag gym-project-frontend/test:latest ghcr.io/ruanfreits/workout-platform-frontend:latest'
                 sh 'docker push ghcr.io/ruanfreits/workout-platform-frontend:latest'
+                sh 'rm .env'
                 }
             }
         }
